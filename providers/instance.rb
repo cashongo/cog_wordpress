@@ -51,7 +51,7 @@ action :manage  do
   end
 
   execute 'wp core install' do
-    command "wp core install --url=#{new_resource.siteurl} --title=#{new_resource.sitetitle} --admin_user=#{new_resource.adminuser} --admin_password=#{new_resource.adminpass} --admin_email=#{new_resource.adminemail}"
+    command "wp core install --url=#{new_resource.siteurl} --title=\"#{new_resource.sitetitle}\" --admin_user=#{new_resource.adminuser} --admin_password=\"#{new_resource.adminpass}\" --admin_email=#{new_resource.adminemail}"
     cwd new_resource.directory
     user new_resource.user
     action :run
