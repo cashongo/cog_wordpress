@@ -1,68 +1,61 @@
 cog_wordpress Cookbook
 ======================
-TODO: Enter the cookbook description here.
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+This cookbook creates a Wordpress instance.
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - cog_wordpress needs toaster to brown your bagel.
-
-Attributes
-----------
-TODO: List your cookbook attributes here.
-
-e.g.
-#### cog_wordpress::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['cog_wordpress']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+It depends on cog_wpcli cookbook which requires php to be installed.
 
 Usage
 -----
-#### cog_wordpress::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
-Just include `cog_wordpress` in your node's `run_list`:
+Include cog_wordpress to your cookbook dependencies.
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[cog_wordpress]"
-  ]
-}
+Use provider cog_wordpress_instance like this:
+
+```ruby
+cog_wordpress_instance 'instance_name' do
+  action :manage
+  user 'wpaccount'
+  directory "/var/www/wordpress"
+  dbuser "dbuser"
+  dbname "dbname"
+  dbhost "dbhost"
+  dbpass "dbpass"
+  sitetitle "Site title"
+  siteurl "http://siteurl.example.com"
+  adminuser "adminuser"
+  adminpass "adminpass"
+  adminemail 'adminemail@example.com'
+  theme "theme"
+  plugins ['akismet','your_plugin']
+end
 ```
 
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
+Actions
+--------
+* **:manage** - install and manage site, default. No other action is defined. It downloads and installs latest wordpress with named plugins and theme.
 
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+Variables
+---------
+* **user** - owner of wordpress files
+* **directory** - directory where to install wordpress
+* **dbuser** - Wordpress MySQL database user
+* **dbname** - Wordpress MySQL database name
+* **dbhost** - Wordpress MySQL database server host
+* **dbpass** - Wordpress MySQL database password
+* **sitetitle** - Wordpress site title
+* **siteurl** - Wordpress site url (sets both siteurl and home)
+* **adminuser** - Wordpress internal admin user name
+* **adminemail** - Wordpress internal admin email address
+* **adminpass** - Wordpress internal admin password
+* **theme** - Wordpress theme to be installed and set as default
+* **plugins** - Wordpress plugins to be installed
+
+It won't **update** your wordpress instance and installed plugins.
+
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: Lauri Jesmin (lauri.jesmin@cashongo.co.uk)
