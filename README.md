@@ -51,7 +51,7 @@ Variables
 * **adminemail** - Wordpress internal admin email address
 * **adminpass** - Wordpress internal admin password
 * **theme** - Wordpress theme to be installed and set as default
-* **plugins** - Arrat of Wordpress plugins to be installed
+* **plugins** - Array of Wordpress plugins to be installed
 
 It won't **update** your wordpress instance and installed plugins.
 
